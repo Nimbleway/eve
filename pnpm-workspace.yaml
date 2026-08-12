@@ -1,0 +1,21 @@
+packages:
+  - "examples/*"
+# Quarantine freshly-published versions (supply-chain hardening). The exclude
+# list below carries fast-moving deps we intentionally track closely.
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - "@nimble-way/nimble-js"
+  - eve@0.25.1
+  - "@ai-sdk/*"
+  - "@rolldown/*"
+  - "@vercel/*"
+  - "@workflow/*"
+  - ai
+  - experimental-ai-sdk-code-mode
+  - eve
+  - nitro
+  - rolldown
+  - workflow
+
+allowBuilds:
+  sharp: false

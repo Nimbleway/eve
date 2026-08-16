@@ -1,6 +1,6 @@
 {
   "name": "@nimble-way/eve",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nimble Web Search and Extract as an extension for Vercel's eve agent framework.",
   "type": "module",
   "license": "Apache-2.0",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@types/node": "24.x",
-    "eve": "0.27.8",
+    "eve": "0.38.3",
     "typescript": "7.0.2",
     "vitest": "^4.0.0"
   },

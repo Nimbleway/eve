@@ -27,7 +27,7 @@ npm i @nimble-way/eve
 
 ## Prerequisites
 
-- An eve project (`npx eve@latest init`) on eve **>= 0.27.8**, Node >= 24.
+- An eve project (`npx eve@latest init`), Node >= 24. See [Compatibility](#compatibility) for the eve releases this extension has actually been verified against — `eve` is a wildcard peer, so no version floor is enforced or claimed here.
 - A Nimble API key in `NIMBLE_API_KEY` (eve auto-loads `.env` / `.env.local`), or passed at the mount site.
 
 ## Usage
@@ -202,14 +202,16 @@ a generally available user choice.
 
 ## Compatibility
 
-Built and tested with **eve 0.27.8** and **`@nimble-way/nimble-js` 1.2.0**. Eve
-0.27.8 remains the exact development pin used to generate the extension
-capability manifest. A clean packed-tarball consumer test also passes on
-**eve 0.33.2** (the current npm release verified 2026-08-12): TypeScript
-compiles and `eve info` reports `ready` with zero diagnostics and all documented
-tools and skills discovered. The `eve` peer dependency is the wildcard `*` per
-eve's extension contract: npm semver does not decide extension compatibility —
-eve validates it from the generated capability manifest at consumption time.
+Built and tested with **eve 0.38.3** (the current npm release verified
+2026-08-16) and **`@nimble-way/nimble-js` 1.2.0**. Eve 0.38.3 is the exact
+development pin used to generate the extension capability manifest, and a
+clean packed-tarball consumer test on the same release passes: TypeScript
+compiles and `eve info` reports `ready` with zero diagnostics and all
+documented tools and skills discovered. The `eve` peer dependency is the
+wildcard `*` per eve's extension contract: npm semver does not decide
+extension compatibility — eve validates it from the generated capability
+manifest at consumption time. No specific eve version floor is claimed or
+implied beyond the exact release verified above.
 
 ## License
 

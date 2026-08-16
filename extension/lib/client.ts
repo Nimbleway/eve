@@ -6,7 +6,7 @@ import type { NimbleEveConfig, NimbleFullClient } from "./schemas";
  * Identifies this integration to Nimble via the `X-Client-Source` header the
  * SDK sends on every request.
  */
-const CLIENT_SOURCE = "eve";
+const CLIENT_SOURCE = "vercel-eve";
 
 let cached: { apiKey: string; client: NimbleFullClient } | undefined;
 

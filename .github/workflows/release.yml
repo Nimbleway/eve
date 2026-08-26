@@ -1,7 +1,11 @@
 name: release
 
-# Publishes @nimble-way/eve to npm with provenance when a GitHub Release is
-# published. Requires the NPM_TOKEN repo secret. Provenance needs id-token:write.
+# Publishes @nimble-way/eve to npm via Trusted Publishing (OIDC, no API token)
+# when a GitHub Release is published. The npm package's trusted publisher must be
+# configured once by an admin (https://docs.npmjs.com/trusted-publishers),
+# pointing at this repo, the `release.yml` workflow, and the `release`
+# environment. The release tag must be vX.Y.Z and match the version in
+# package.json.
 on:
   release:
     types: [published]
@@ -18,6 +22,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
@@ -47,7 +52,5 @@ jobs:
             exit 1
           fi
 
-      # --provenance (with id-token:write) attaches a build provenance attestation.
+      # Provenance is attached from the OIDC identity; no token is involved.
       - run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

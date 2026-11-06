@@ -5,7 +5,6 @@ packages:
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@nimble-way/nimble-js"
-  - eve@0.25.1
   - "@ai-sdk/*"
   - "@rolldown/*"
   - "@vercel/*"

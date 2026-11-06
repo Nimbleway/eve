@@ -11,6 +11,6 @@ export default defineEval({
     );
     t.succeeded();
     t.calledTool("web_search");
-    t.noFailedActions();
+    t.noFailedCalls();
   },
 });

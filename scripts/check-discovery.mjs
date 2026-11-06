@@ -8,6 +8,8 @@
 //     to avoid duplicating the promoted web_search / web_fetch)
 //   - Agent API V2 creation and result retrieval are separate discovered tools
 //     so resumed polling cannot repeat a billable create
+//   - dist/ and the example agent use the pinned eve, and every version the
+//     README names is that pin, this package's version or a known older release
 // Runs credential-free; used by CI on every push.
 
 import { execFileSync } from "node:child_process";
@@ -65,6 +67,28 @@ assert(
   `web_fetch sourceId is ${webFetch?.sourceId}, expected the agent-local override`,
 );
 
+// The README promises the eve floor that `builtWithEve` sets, so a pin bump must update the build, the
+// example agent and every version the README names.
+const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+const examplePkg = JSON.parse(readFileSync(join(agentDir, "package.json"), "utf8"));
+const built = JSON.parse(readFileSync(join(root, "dist", "extension", "_manifest.json"), "utf8"));
+const evePin = pkg.devDependencies?.eve;
+assert(built.builtWithEve === evePin, `dist was built with eve ${built.builtWithEve}, but package.json pins ${evePin}; rebuild`);
+assert(
+  examplePkg.dependencies?.eve === evePin,
+  `examples/agent pins eve ${examplePkg.dependencies?.eve}, but the package pins ${evePin}`,
+);
+const readme = readFileSync(join(root, "README.md"), "utf8");
+assert(
+  readme.replace(/\s+/g, " ").includes(`requires eve ${evePin} or later`),
+  `README Prerequisites doesn't say "requires eve ${evePin} or later"`,
+);
+// Older releases the README names on purpose: the eve that built 0.1.1, 0.1.1 itself, and nimble-js.
+const known = new Set([evePin, pkg.version, "0.38.3", "0.1.1", pkg.dependencies?.["@nimble-way/nimble-js"]?.replace(/^\^/, "")]);
+for (const version of new Set(readme.match(/\b\d+\.\d+\.\d+(?:-[\w.]+)?\b/g) ?? [])) {
+  assert(known.has(version), `README names version ${version}; update it to ${evePin} or add it to the known list`);
+}
+
 if (failures.length > 0) {
   console.error("Discovery check FAILED:");
   for (const f of failures) console.error(`  ✗ ${f}`);
@@ -74,3 +98,4 @@ console.log("Discovery check passed:");
 console.log(`  ✓ tools: ${tools.join(", ")}`);
 console.log(`  ✓ skills: ${(info.skills ?? []).join(", ")}`);
 console.log("  ✓ web_search and web_fetch are the Nimble implementations (agent-local overrides)");
+console.log(`  ✓ dist built with eve ${evePin}, matching the README's stated floor`);

@@ -12,6 +12,6 @@ export default defineEval({
     );
     t.succeeded();
     t.calledTool("web_fetch");
-    t.noFailedActions();
+    t.noFailedCalls();
   },
 });

@@ -9,7 +9,7 @@
 //   - Agent API V2 creation and result retrieval are separate discovered tools
 //     so resumed polling cannot repeat a billable create
 //   - dist/ and the example agent use the pinned eve, the README states the pin
-//     as the floor, and every version it names is the pin, this package's version
+//     as the floor and every version it names is the pin, this package's version
 //     or one of the known versions listed below
 // Runs credential-free; used by CI on every push.
 

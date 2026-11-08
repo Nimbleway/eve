@@ -8,8 +8,9 @@
 //     to avoid duplicating the promoted web_search / web_fetch)
 //   - Agent API V2 creation and result retrieval are separate discovered tools
 //     so resumed polling cannot repeat a billable create
-//   - dist/ and the example agent use the pinned eve, and every version the
-//     README names is that pin, this package's version or a known older release
+//   - dist/ and the example agent use the pinned eve, the README states the pin
+//     as the floor, and every version it names is the pin, this package's version
+//     or one of the known versions listed below
 // Runs credential-free; used by CI on every push.
 
 import { execFileSync } from "node:child_process";

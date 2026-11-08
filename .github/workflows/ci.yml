@@ -33,7 +33,8 @@ jobs:
 
       # Resolves the example agent with `eve info --json` and asserts the
       # extension contract (nimble__* tools, skill, web_search override), and
-      # that dist/, the example agent and the README versions match the pinned eve.
+      # that dist/ and the example agent use the pinned eve and the README names
+      # no unexpected version.
       - run: node scripts/check-discovery.mjs
 
       - run: pnpm --filter nimble-eve-example-agent run typecheck

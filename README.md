@@ -201,7 +201,7 @@ a generally available user choice.
 - **Node version errors** — eve requires Node >= 24.
 - **`uses an old epoch-based distribution manifest`** — your eve is 0.84 or later and you have 0.1.x installed; upgrade eve to 1.0.0-rc.6 or later if needed, then install 0.2.0 or later.
 - **`was built with eve 1.0.0-rc.6`** — your eve is older than 1.0.0-rc.6; upgrade eve, or see [Compatibility](#compatibility).
-- **`has no valid compatibility manifest`** — if your eve is 0.38.3 through 0.83 and you have 0.2.x installed, install `@nimble-way/eve@^0.1`; otherwise reinstall the package.
+- **`has no valid compatibility manifest`** — if your eve is 0.83 or earlier and you have 0.2.x installed, install `@nimble-way/eve@^0.1` (tested with eve 0.38.3); otherwise reinstall the package.
 
 ## Compatibility
 
@@ -209,13 +209,12 @@ Version 0.2.0 is built and tested with **eve 1.0.0-rc.6** and
 **`@nimble-way/nimble-js` 1.2.0**. eve records the version that built an
 extension in its compatibility manifest and loads the extension only on that
 release or a later one, so 0.2.0 needs eve 1.0.0-rc.6 or later, including eve
-1.0. A clean packed-tarball consumer on eve 1.0.0-rc.6 passes: TypeScript
-compiles and `eve info` reports `ready` with zero diagnostics and all
-documented tools and skills discovered.
+1.0. The example agent in this repo passes `eve info` and the discovery check
+on eve 1.0.0-rc.6.
 
 eve 0.84 and later, including eve 1.0, refuse extensions built with eve 0.83
-or earlier. 0.1.1 was built with eve 0.38.3, so it loads only on eve 0.83 or
-earlier. If your agent runs eve 0.38.3 through 0.83, install 0.1.x with
+or earlier. 0.1.1 was built and tested with eve 0.38.3 and loads only on eve
+0.83 or earlier. If your agent can't move to eve 1.0 yet, install 0.1.x with
 `npm i @nimble-way/eve@^0.1`. On eve 0.84 or later but older than 1.0.0-rc.6,
 neither release loads, so upgrade eve to 1.0.0-rc.6 or later.
 

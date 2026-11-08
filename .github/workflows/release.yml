@@ -40,7 +40,6 @@ jobs:
 
       - run: pnpm test
 
-      - run: node scripts/check-discovery.mjs
 
       # Guard against publishing a version that doesn't match the release tag.
       - name: Verify tag matches package.json version

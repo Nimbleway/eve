@@ -86,7 +86,7 @@ assert(
 // Versions the README names on purpose: the eve that built 0.1.1, 0.1.1 itself, 0.2.0 as the first release
 // built for eve 1.0 and the nimble-js dependency.
 const known = new Set([evePin, pkg.version, "0.38.3", "0.1.1", "0.2.0", pkg.dependencies?.["@nimble-way/nimble-js"]?.replace(/^\^/, "")]);
-for (const version of new Set(readme.match(/\b\d+\.\d+\.\d+(?:-[\w.]+)?\b/g) ?? [])) {
+for (const version of new Set([...readme.matchAll(/(?<![\w.])v?(\d+\.\d+\.\d+(?:-[\w.]*\w)?)/g)].map((m) => m[1]))) {
   assert(known.has(version), `README names version ${version}; update it or add it to the known list`);
 }
 

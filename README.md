@@ -201,14 +201,14 @@ a generally available user choice.
 - **Node version errors** — eve requires Node >= 24.
 - **`uses an old epoch-based distribution manifest`** — your eve is 0.84 or later and you have 0.1.x installed; upgrade eve to 1.0.0-rc.6 or later if needed, then install 0.2.0 or later.
 - **`was built with eve 1.0.0-rc.6`** — your eve is older than 1.0.0-rc.6; upgrade eve, or see [Compatibility](#compatibility).
-- **`has no valid compatibility manifest`** — if your eve is 0.38.3 through 0.83 and you have 0.2.x installed, install `@nimble-way/eve@^0.1`; on older eve, upgrade eve; otherwise reinstall the package.
+- **`has no valid compatibility manifest`** — if your eve is 0.38.3 through 0.83 and you have 0.2.x installed, install `@nimble-way/eve@^0.1`; on older eve, upgrade eve to 1.0.0-rc.6 or later, or to 0.38.3 through 0.83 and install `@nimble-way/eve@^0.1`; otherwise reinstall the package.
 
 ## Compatibility
 
-Version 0.2.0 is built and tested with **eve 1.0.0-rc.6** and
+This release is built and tested with **eve 1.0.0-rc.6** and
 **`@nimble-way/nimble-js` 1.2.0**. eve records the version that built an
 extension in its compatibility manifest and loads the extension only on that
-release or a later one, so 0.2.0 needs eve 1.0.0-rc.6 or later, including eve
+release or a later one, so this release needs eve 1.0.0-rc.6 or later, including eve
 1.0. The example agent in this repo passes `eve info` and the discovery check
 on eve 1.0.0-rc.6.
 

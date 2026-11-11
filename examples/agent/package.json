@@ -16,9 +16,9 @@
   "dependencies": {
     "@ai-sdk/openai": "^4.0.16",
     "@nimble-way/eve": "workspace:*",
-    "@vercel/connect": "0.4.0",
-    "ai": "^7.0.58",
-    "eve": "0.38.3",
+    "@vercel/connect": "2.7.0",
+    "ai": "^7.0.137",
+    "eve": "1.0.0-rc.6",
     "zod": "4.4.3"
   },
   "devDependencies": {

@@ -27,7 +27,7 @@ npm i @nimble-way/eve
 
 ## Prerequisites
 
-- An eve project (`npx eve@latest init`), Node >= 24. See [Compatibility](#compatibility) for the eve releases this extension has actually been verified against — `eve` is a wildcard peer, so no version floor is enforced or claimed here.
+- An eve 1.0 project (`npx eve@latest init`), Node >= 24. This release requires eve 1.0.0-rc.6 or later; see [Compatibility](#compatibility).
 - A Nimble API key in `NIMBLE_API_KEY` (eve auto-loads `.env` / `.env.local`), or passed at the mount site.
 
 ## Usage
@@ -90,7 +90,7 @@ import { disableTool } from "eve/tools";
 export default disableTool();
 ```
 
-`eve info` should then list exactly `web_search` and `web_fetch` (both Nimble-backed) plus the `nimble__web-research` skill. Promoting only one of the two? Keep that tool's promote + disable pair and drop the other's — the un-promoted tool stays available as `nimble__search` / `nimble__extract`. (The [example agent](examples/agent) in this repo runs the full five-file setup.)
+`eve info` should then list `web_search` and `web_fetch` (both Nimble-backed), `nimble__agent_start`, `nimble__agent_result` and the `nimble__web-research` skill. Promoting only one of the two? Keep that tool's promote + disable pair and drop the other's — the un-promoted tool stays available as `nimble__search` / `nimble__extract`. (The [example agent](examples/agent) in this repo runs the full five-file setup.)
 
 ### Why promote `web_fetch`?
 
@@ -199,19 +199,28 @@ a generally available user choice.
 - **`nimble__search` and `web_search` (or `nimble__extract` and `web_fetch`) look like the same tool** — they are; add the matching `disableTool()` file from the [promotion setup](#mounting-and-promoting-together-disable-each-duplicate) for every tool you promote.
 - **Different namespace than `nimble__*`** — the prefix comes from your mount filename (`agent/extensions/<name>.ts`); name the file `nimble.ts` for the names used in this README.
 - **Node version errors** — eve requires Node >= 24.
+- **`uses an old epoch-based distribution manifest`** — your eve is 0.84 or later and you have 0.1.x installed; upgrade eve to 1.0.0-rc.6 or later if needed, then install 0.2.0 or later.
+- **`was built with eve 1.0.0-rc.6`** — your eve is older than 1.0.0-rc.6; upgrade eve, or see [Compatibility](#compatibility).
+- **`has no valid compatibility manifest`** — if your eve is 0.38.3 through 0.83 and you have 0.2.x installed, install `@nimble-way/eve@^0.1`; on older eve, upgrade eve to 1.0.0-rc.6 or later, or to 0.38.3 through 0.83 and install `@nimble-way/eve@^0.1`; otherwise reinstall the package.
 
 ## Compatibility
 
-Built and tested with **eve 0.38.3** (the current npm release verified
-2026-08-16) and **`@nimble-way/nimble-js` 1.2.0**. Eve 0.38.3 is the exact
-development pin used to generate the extension capability manifest, and a
-clean packed-tarball consumer test on the same release passes: TypeScript
-compiles and `eve info` reports `ready` with zero diagnostics and all
-documented tools and skills discovered. The `eve` peer dependency is the
-wildcard `*` per eve's extension contract: npm semver does not decide
-extension compatibility — eve validates it from the generated capability
-manifest at consumption time. No specific eve version floor is claimed or
-implied beyond the exact release verified above.
+This release is built and tested with **eve 1.0.0-rc.6** and
+**`@nimble-way/nimble-js` 1.2.0**. eve records the version that built an
+extension in its compatibility manifest and loads the extension only on that
+release or a later one, so this release needs eve 1.0.0-rc.6 or later, including eve
+1.0. The example agent in this repo passes `eve info` and the discovery check
+on eve 1.0.0-rc.6.
+
+eve 0.84 and later, including eve 1.0, refuse extensions built with eve 0.83
+or earlier. 0.1.1 was built and tested with eve 0.38.3 and loads only on eve
+0.83 or earlier. If your agent runs eve 0.38.3 through 0.83 and can't move to
+eve 1.0 yet, install 0.1.x with `npm i @nimble-way/eve@^0.1`. On eve 0.84 or later but older than 1.0.0-rc.6,
+neither release loads, so upgrade eve to 1.0.0-rc.6 or later.
+
+The `eve` peer dependency is the wildcard `*` per eve's extension contract:
+npm semver doesn't decide extension compatibility, eve does, from the
+manifest at consumption time.
 
 ## License
 
